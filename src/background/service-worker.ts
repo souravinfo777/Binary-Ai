@@ -125,10 +125,14 @@ async function captureAndAnalyze(tabId: number): Promise<CaptureResult | null> {
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (info.menuItemId === 'analyze-quotex-chart' && tab?.id) {
-    const result = await handleCapture(tab.id);
-    if (result) {
-      await chrome.storage.local.set({ lastCaptureResult: result });
-      await chrome.action.openPopup();
+    try {
+      const result = await handleCapture(tab.id);
+      if (result) {
+        await chrome.storage.local.set({ lastCaptureResult: result });
+        await chrome.action.openPopup();
+      }
+    } catch (err) {
+      console.error('Analysis via context menu failed:', err);
     }
   }
 });

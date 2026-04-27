@@ -31,12 +31,16 @@ const TIMEFRAME_PATTERNS: Record<string, Timeframe> = {
   '60m': '1h',
 };
 
+const SORTED_PATTERNS = Object.entries(TIMEFRAME_PATTERNS).sort(
+  ([a], [b]) => b.length - a.length
+);
+
 function detectTimeframe(): Timeframe | null {
   for (const selector of TIMEFRAME_SELECTORS) {
     const elements = document.querySelectorAll(selector);
     for (const el of elements) {
       const text = (el.textContent || '').trim().toLowerCase();
-      for (const [pattern, tf] of Object.entries(TIMEFRAME_PATTERNS)) {
+      for (const [pattern, tf] of SORTED_PATTERNS) {
         if (text === pattern || text.includes(pattern)) {
           return tf;
         }

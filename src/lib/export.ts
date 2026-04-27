@@ -14,17 +14,19 @@ export function exportToCSV(items: HistoryItem[]): string {
     'Notes',
   ];
 
+  const csvEscape = (val: string) => `"${(val || '').replace(/"/g, '""')}"`;
+
   const rows = items.map((item) => [
-    item.id,
-    new Date(item.timestamp).toISOString(),
-    item.timeframe,
-    item.symbol,
-    item.prediction,
-    String(item.confidence),
-    `"${(item.analysisSummary || '').replace(/"/g, '""')}"`,
-    item.apiName,
-    item.actualOutcome,
-    `"${(item.notes || '').replace(/"/g, '""')}"`,
+    csvEscape(item.id),
+    csvEscape(new Date(item.timestamp).toISOString()),
+    csvEscape(item.timeframe),
+    csvEscape(item.symbol),
+    csvEscape(item.prediction),
+    csvEscape(String(item.confidence)),
+    csvEscape(item.analysisSummary),
+    csvEscape(item.apiName),
+    csvEscape(item.actualOutcome),
+    csvEscape(item.notes),
   ]);
 
   return [headers.join(','), ...rows.map((r) => r.join(','))].join('\n');

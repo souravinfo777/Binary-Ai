@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    @apply bg-bg-primary text-text-primary font-sans antialiased;
+    min-width: 400px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-bg-secondary;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-bg-tertiary rounded-full;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-accent hover:bg-accent-hover text-white rounded-lg font-medium transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-bg-tertiary hover:bg-gray-600 text-text-primary rounded-lg font-medium transition-colors duration-200;
+  }
+
+  .btn-green {
+    @apply px-4 py-2 bg-predict-green hover:bg-green-600 text-white rounded-lg font-medium transition-colors duration-200;
+  }
+
+  .btn-red {
+    @apply px-4 py-2 bg-predict-red hover:bg-red-600 text-white rounded-lg font-medium transition-colors duration-200;
+  }
+
+  .card {
+    @apply bg-bg-secondary rounded-xl p-4 border border-gray-700/50;
+  }
+
+  .input-field {
+    @apply w-full px-3 py-2 bg-bg-tertiary border border-gray-600 rounded-lg text-text-primary placeholder-text-secondary focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent;
+  }
+
+  .select-field {
+    @apply w-full px-3 py-2 bg-bg-tertiary border border-gray-600 rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-text-secondary mb-1;
+  }
+
+  .badge-green {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-bold bg-green-500/20 text-predict-green border border-green-500/30;
+  }
+
+  .badge-red {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-bold bg-red-500/20 text-predict-red border border-red-500/30;
+  }
+
+  .tab-button {
+    @apply px-4 py-2 text-sm font-medium transition-colors duration-200 border-b-2 border-transparent hover:text-accent;
+  }
+
+  .tab-button.active {
+    @apply text-accent border-accent;
+  }
+
+  .confidence-bar {
+    @apply h-2 rounded-full overflow-hidden bg-bg-tertiary;
+  }
+
+  .confidence-fill {
+    @apply h-full rounded-full transition-all duration-500;
+  }
+
+  .signal-positive {
+    @apply text-predict-green;
+  }
+
+  .signal-negative {
+    @apply text-predict-red;
+  }
+
+  .signal-neutral {
+    @apply text-yellow-400;
+  }
+}
